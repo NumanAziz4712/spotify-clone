@@ -10,6 +10,8 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import useSpotify from '../hooks/useSpotify';
+import { useRecoilState } from 'recoil';
+import { playlistIdState } from '../atoms/playlistAtom';
 const Sidebar = () => {
   const spotifyApi = useSpotify();
   // a helper method to know if we are loggedin or out
@@ -17,7 +19,7 @@ const Sidebar = () => {
   // we need to persist the state when login and out
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
-  const [playlistId, setPlaylisId] = useState(null);
+  const [playlistId, setPlaylisId] = useRecoilState(playlistIdState);
   console.log(`you picked playlist >>> ${playlistId}`);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const Sidebar = () => {
   // console.log(session);
   return (
     // the scroll wouldnt work without the h-screen
-    <div className='text-gray-500 p-5 scrollbar-hide overflow-y-scroll border-r  h-screen border-gray-900 text-sm'>
+    <div className='text-gray-500 p-5 scrollbar-hide overflow-y-scroll border-r  h-screen border-gray-900 lg:text-sm text-xs hidden md:inline-flex sm:max-w-[12rem] lg:max-w-[15rem]'>
       <div className='space-y-3'>
         <button
           className='flex items-center space-x-2 hover:text-white'
