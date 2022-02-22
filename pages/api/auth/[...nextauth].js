@@ -43,7 +43,7 @@ export default NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    async({ token, account, user }) {
+    async jwt({ token, account, user }) {
       // if its first time to sign, it returns token var and account var
       if (account && user) {
         return {
@@ -56,6 +56,7 @@ export default NextAuth({
           accessTokenExpires: account.expires_at * 1000,
         };
       }
+
       // we are checking if the token is expired
       // return prev token if the access token has not expired yet
       // it check it against the current time
@@ -73,6 +74,7 @@ export default NextAuth({
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;
+
       return session;
     },
   },
