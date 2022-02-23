@@ -7,7 +7,7 @@ const Songs = () => {
   const playlist = useRecoilValue(playListState);
   //   console.log(playlist);
   return (
-    <div className='text-white px-8 grid grid-cols-1 gap-2'>
+    <div className='text-white px-8 flex flex-col space-y-1'>
       {playlist?.tracks.items.map((track, index) => (
         <Song key={track.track.id} {...track} index={index} />
       ))}

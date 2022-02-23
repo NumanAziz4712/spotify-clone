@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import { shuffle } from 'lodash';
@@ -43,7 +43,10 @@ const Center = () => {
   return (
     <div className='flex-grow relative overflow-y-scroll h-screen scrollbar-hide'>
       <header>
-        <div className='flex absolute right-8 top-5 items-center bg-black p-1 pr-2 space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full text-white'>
+        <div
+          className='flex absolute right-8 top-5 items-center bg-black p-1 pr-2 space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full text-white'
+          onClick={signOut}
+        >
           <img
             src={session?.user?.image}
             alt=''
@@ -58,7 +61,7 @@ const Center = () => {
         className={`flex items-end space-x-7 bg-gradient-to-b p-8 to-black ${color} h-80`}
       >
         <img
-          className='h-44 w-44 shadow-2xl'
+          className='h-44 w-44 rounded-sm shadow-2xl'
           src={playlist?.images?.[0]?.url}
           alt=''
         />
